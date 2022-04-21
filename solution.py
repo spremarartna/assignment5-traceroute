@@ -114,12 +114,16 @@ def get_route(hostname):
                 #Fetch the icmp type from the IP packet
                 icmpheader = recvPacket[20:28]
                 types, code, checksum, packetID, sequence = struct.unpack("bbHHh", icmpheader)
+                #print = name(addr[0])
                 #Fill in end
-               # try: #try to fetch the hostname
+                try: #try to fetch the hostname
                     #Fill in start
+                    host = gethostbyaddr(hostname)
+                    name = name = '{0} ({1})'.format(hostname, host[0])
                     #Fill in end
-               # except herror:   #if the host does not provide a hostname
+                except herror:   #if the host does not provide a hostname
                     #Fill in start
+                    name = '{0} (host name could not be determined)'.format(hostname)
                     #Fill in end
 
                 if types == 11:
