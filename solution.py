@@ -124,7 +124,7 @@ def get_route(hostname):
                 #Fill in end
                 try: #try to fetch the hostname
                     #Fill in start
-                    hostn = gethostbyaddr(hostname)
+                    hostn = gethostbyaddr(addr[0])[0]
                     #name = name = '{0} ({1})'.format(hostname, host[0])
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
@@ -153,7 +153,8 @@ def get_route(hostname):
                     tracelist1.append(ttl)
                     tracelist1.append(addr[0])
                     tracelist1.append(hostn)
-                    tracelist2.append(tracelist1)                    #Fill in end
+                    tracelist2.append(tracelist1)                    
+                    #Fill in end
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
