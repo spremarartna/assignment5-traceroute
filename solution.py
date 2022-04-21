@@ -95,7 +95,10 @@ def get_route(hostname):
                     tracelist1.append("* * * Request timed out.")
                     #Fill in start
                     #You should add the list above to your all traces list
-                    print(tracelist1)
+                    bytes = struct.calcsize("d")
+                    timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
+                    print('ttl = * * * Request timed out.')
+                    tracelist2.append(tracelist1)
                     #Fill in end
                 recvPacket, addr = mySocket.recvfrom(1024)
                 timeReceived = time.time()
@@ -104,7 +107,10 @@ def get_route(hostname):
                     tracelist1.append("* * * Request timed out.")
                     #Fill in start
                     #You should add the list above to your all traces list
-                    print(tracelist1)
+                    bytes = struct.calcsize("d")
+                    timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
+                    print('ttl = * * * Request timed out.')
+                    tracelist2.append(tracelist1)
                     #Fill in end
             except timeout:
                 continue
@@ -119,11 +125,11 @@ def get_route(hostname):
                 try: #try to fetch the hostname
                     #Fill in start
                     host = gethostbyaddr(hostname)
-                    name = name = '{0} ({1})'.format(hostname, host[0])
+                    #name = name = '{0} ({1})'.format(hostname, host[0])
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
-                    name = '{0} (host name could not be determined)'.format(hostname)
+                    host = "{0} (hostname could not be determined):".format(host)
                     #Fill in end
 
                 if types == 11:
@@ -132,22 +138,34 @@ def get_route(hostname):
                     bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here
-                    print("%d rtt=%.0f ms %s" %(ttl, (timeReceived - t)*1000, addr[0]))
+                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, (timeReceived - t)*1000, addr[0], host))
+                    tracelist1.append(ttl)
+                    tracelist1.append(addr[0])
+                    tracelist1.append(host)
+                    tracelist2.append(tracelist1)
                     #Fill in end
                 elif types == 3:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here
-                    print("%d rtt=%.0f ms %s" %(ttl, (timeReceived - t)*1000, addr[0]))
-                    #Fill in end
+                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, (timeReceived - t)*1000, addr[0], host))
+                    tracelist1.append(ttl)
+                    tracelist1.append(addr[0])
+                    tracelist1.append(host)
+                    tracelist2.append(tracelist1)                    #Fill in end
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here and return your list if your destination IP is met
-                    print("%d rtt=%.0f ms %s" %(ttl, (timeReceived - timeSent)*1000, addr[0]))
-
+                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, (timeReceived - timeSent)*1000, addr[0], host))
+                    tracelist1.append(ttl)
+                    tracelist1.append(addr[0])
+                    tracelist1.append(host)
+                    tracelist2.append(tracelist1)
+                    
+                    return tracelist2
                     #Fill in end
                 else:
                     #Fill in start
