@@ -129,7 +129,7 @@ def get_route(hostname):
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
-                    replyhostn = "hostname not returnable."
+                    replyhostn = "hostname not returnable"
                     #Fill in end
 
                 if types == 11:
@@ -138,7 +138,7 @@ def get_route(hostname):
                     bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here
-                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, str((timeReceived - t)*1000), addr[0], hostn))
+                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, (timeReceived - t)*1000, addr[0], hostn))
                     tracelist1.append(str(ttl))
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(str(hostn))
@@ -149,7 +149,7 @@ def get_route(hostname):
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here
-                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, str((timeReceived - t)*1000), addr[0], hostn))
+                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, (timeReceived - t)*1000, addr[0], hostn))
                     tracelist1.append(str(ttl))
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(str(hostn))
@@ -159,7 +159,7 @@ def get_route(hostname):
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here and return your list if your destination IP is met
-                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, str((timeReceived - timeSent)*1000), addr[0], hostn))
+                    print("ttl = %d rtt = %.0f ms IP = %s host: %s" %(ttl, (timeReceived - timeSent)*1000, addr[0], hostn))
                     tracelist1.append(str(ttl))
                     tracelist1.append(str(addr[0]))
                     tracelist1.append(str(hostn))
