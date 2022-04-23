@@ -92,24 +92,26 @@ def get_route(hostname):
                 whatReady = select.select([mySocket], [], [], timeLeft)
                 howLongInSelect = (time.time() - startedSelect)
                 if whatReady[0] == []: # Timeout
-                    tracelist1.append("* * * Request timed out.")
+                    #tracelist1.append("* * * Request timed out.")
                     #Fill in start
                     #You should add the list above to your all traces list
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     print('ttl = * * * Request timed out.')
+                    tracelist1.append("* * * Request timed out.")
                     tracelist2.append(tracelist1)
                     #Fill in end
                 recvPacket, addr = mySocket.recvfrom(1024)
                 timeReceived = time.time()
                 timeLeft = timeLeft - howLongInSelect
                 if timeLeft <= 0:
-                    tracelist1.append("* * * Request timed out.")
+                    #tracelist1.append("* * * Request timed out.")
                     #Fill in start
                     #You should add the list above to your all traces list
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     print('ttl = * * * Request timed out.')
+                    tracelist1.append("* * * Request timed out.")
                     tracelist2.append(tracelist1)
                     #Fill in end
             except timeout:
@@ -130,7 +132,6 @@ def get_route(hostname):
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
                     replyhostn = "(hostname not returnable)"
-                    tracelist2.append(tracelist1)
                     #Fill in end
 
                 if types == 11:
